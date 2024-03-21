@@ -30,7 +30,7 @@ button {
 
 .home_clothing {
   display: flex;
-  gap: 20%;
+  gap: 10%;
   align-items: center;
   height: 80px;
   background-color: white;
@@ -85,8 +85,15 @@ span {
   color: green;
   font-size: 60px;
 }
+
+.vegetable {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* background-color: red; */
+}
 .vegetable img {
-  width: 300px;
+  width: 250px;
 }
 .vegetable b {
   color: green;
@@ -133,7 +140,7 @@ span {
   display: flex;
   gap: 20px;
 }
-.buy button{
+.buy button {
   background-color: rgba(0, 128, 0, 0.338);
   border-radius: 30px;
 }

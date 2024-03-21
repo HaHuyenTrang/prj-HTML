@@ -33,6 +33,12 @@
       .buy  :hover{
         color: white;
       }
+      #user-welcome{
+        color:  rgba(3, 34, 3, 0.74) ;
+        font-size: 25px;
+        
+      }
+
     </style>
   </head>
   <body>
@@ -50,7 +56,12 @@
             <span class="material-symbols-outlined"> shopping_bag </span>GIỎ
             HÀNG
           </li>
-          <li>
+          <li><span class="material-symbols-outlined">
+              account_circle
+              </span>
+            <div id="user-welcome"> </div>
+            </li>
+            <li>
             <span id="button-2" class="material-symbols-outlined"> density_small </span>
             <div id="button" style="display: none;">
               <button id="login">Đăng nhập</button>
@@ -183,7 +194,7 @@
     <br />
     <br />
 
-    <div class="menu-food">
+    <div class="menu-food" >
       <ul>
         <li><b>TẤT CẢ</b></li>
         <li><b>NƯỚC GIẢI KHÁT</b></li>
@@ -193,176 +204,13 @@
       </ul>
     </div>
     <br />
-    <div class="vegetable">
-      <div>
-        <img
-          src="https://bizweb.dktcdn.net/thumb/large/100/383/804/products/13-0b69bdec-f167-4a7b-a54d-392b42ea1d21.jpg?v=1586771698080"
-          alt=""
-        />
-        <p>rau muống</p>
-        <b>30.000 đ</b>
-        <div class="buy">
-          <br>
-          <button>Thêm vào <span class="material-symbols-outlined"> shopping_bag </span> </button> <button>mua ngay</button>
-         </div> 
-        <br>
+    
+      <div class="vegetable" id="product1">
+       
       </div>
-      <div>
-        <img
-          src="https://bizweb.dktcdn.net/thumb/large/100/383/804/products/22-0ebe1919-23f8-423c-82dc-05bceb49649d.jpg?v=1586771656913"
-          alt=""
-        />
-        <p>nấm kim châm</p>
-        <b>15.000 đ</b>
-        <div class="buy">
-          <br>
-          <button>Thêm vào <span class="material-symbols-outlined"> shopping_bag </span> </button> <button>mua ngay</button>
-        </div>  
-        <br>
-      </div>
-      <div>
-        <img
-          src="https://bizweb.dktcdn.net/thumb/large/100/383/804/products/16-dbe6f83d-77ce-49d7-860d-617f7bfcc5e3.jpg?v=1586771621947"
-          alt=""
-        />
-        <p>thịt lợn</p>
-        <b>300.000 đ</b>
-        <div class="buy">
-          <br>
-          <button>Thêm vào <span class="material-symbols-outlined"> shopping_bag </span> </button> <button>mua ngay</button>
-        </div> 
-        <br>
-      </div>
-      <div>
-        <img
-          src="https://bizweb.dktcdn.net/thumb/large/100/383/804/products/6-57ff4cf1-efa5-4479-af31-e87169caeb47.jpg?v=1586771726600"
-          alt=""
-        />
-        <p>kẹo XYLYTOL</p>
-        <b>40.000 đ</b>
-        <div class="buy">
-          <br>
-          <button>Thêm vào <span class="material-symbols-outlined"> shopping_bag </span> </button> <button>mua ngay</button>
-        </div>   
-       <br>
-      </div>
-    </div>
-
-    <div class="vegetable">
-      <div>
-        <img
-          src="https://bizweb.dktcdn.net/thumb/large/100/383/804/products/1.jpg?v=1586546649760"
-          alt=""
-        />
-        <p>bia lon</p>
-        <b>320.000 đ</b>
-        <div class="buy">
-          <br>
-          <button>Thêm vào <span class="material-symbols-outlined"> shopping_bag </span> </button> <button>mua ngay</button>
-        </div>   
-       <br>
-      </div>
-      <div>
-        <img
-          src="https://bizweb.dktcdn.net/thumb/large/100/383/804/products/3-00ccab9b-c9cb-4785-9eee-0eb88dd23e0a.jpg?v=1586546741313"
-          alt=""
-        />
-        <p>bánh mì</p>
-        <b>15.000 đ</b>
-        <div class="buy">
-          <br>
-          <button>Thêm vào <span class="material-symbols-outlined"> shopping_bag </span> </button> <button>mua ngay</button>
-        </div>  
-        <br>
-      </div>
-      <div>
-        <img
-          src="https://bizweb.dktcdn.net/thumb/large/100/383/804/products/4-633225d0-dedd-464c-994e-a9788f154949.jpg?v=1586546779223"
-          alt=""
-        />
-        <p>muối sạch</p>
-        <b>8.000 đ</b>
-        <div class="buy">
-          <br>
-          <button>Thêm vào <span class="material-symbols-outlined"> shopping_bag </span> </button> <button>mua ngay</button>
-        </div>   
-       <br>
-      </div>
-      <div>
-        <img
-          src="https://bizweb.dktcdn.net/thumb/large/100/383/804/products/8-cffbe610-14c8-4679-bd2e-de784a3597ac.jpg?v=1586546813233"
-          alt=""
-        />
-        <p>mì cung đình</p>
-        <b>150.000 đ</b>
-        <div class="buy">
-          <br>
-          <button>Thêm vào <span class="material-symbols-outlined"> shopping_bag </span> </button> <button>mua ngay</button>
-        </div> 
-         <br>
-      </div>
-    </div>
-
-    <div class="vegetable">
-      <div>
-        <img
-          src="https://bizweb.dktcdn.net/thumb/large/100/383/804/products/12-548a836b-476f-46bf-9ceb-bc327aa34928.jpg?v=1586546883750"
-          alt=""
-        />
-        <p>cải ngọt</p>
-        <b>30.000 đ</b>
-        <div class="buy">
-          <br>
-          <button>Thêm vào <span class="material-symbols-outlined"> shopping_bag </span> </button> <button>mua ngay</button>
-        </div>  
-        <br>
-      </div>
-      <div>
-        <img
-          src="https://bizweb.dktcdn.net/thumb/large/100/383/804/products/14-cd11ecfa-7de5-42a7-a067-2aadf5ddb816.jpg?v=1586546904400"
-          alt=""
-        />
-        <p>nấm to</p>
-        <b>105.000 đ</b>
-        <div class="buy">
-          <br>
-          <button>Thêm vào <span class="material-symbols-outlined"> shopping_bag </span> </button> <button>mua ngay</button>
-        </div>  
-        <br>
-      </div>
-      <div>
-        <img
-          src="https://bizweb.dktcdn.net/thumb/large/100/383/804/products/15-c4ca2856-53ff-45f5-ae3d-1a1db87f9f1b.jpg?v=1586546926977"
-          alt=""
-        />
-        <p>thịt heo</p>
-        <b>300.000 đ</b>
-        <div class="buy">
-          <br>
-          <button>Thêm vào <span class="material-symbols-outlined"> shopping_bag </span> </button> <button>mua ngay</button>
-        </div>  
-        <br>
-      </div>
-      <div>
-        <img
-          src="https://bizweb.dktcdn.net/thumb/large/100/383/804/products/11-a3cdebab-bdae-4eb8-a193-a05fc55822a5.jpg?v=1586546961453"
-          alt=""
-        />
-        <p>bắp cải</p>
-        <b>10.000 đ</b>
-        <div class="buy">
-          <br>
-          <button>Thêm vào <span class="material-symbols-outlined"> shopping_bag </span> </button> <button>mua ngay</button>
-        </div> 
-        <br>
-      </div>
-    </div>
     <div class="button">
       <button>XEM THÊM</button>
     </div>
-    <br>
-    <br>
-
     <div class="end">
       <span class="material-symbols-outlined">
         compost
@@ -389,4 +237,16 @@
     
   </body>
   <script src="../javascript/script.js"></script>
+  <!-- <script src="../javascript/login.js"></script> -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const userLogin = JSON.parse(localStorage.getItem("userLogin"));
+
+    if (userLogin) {
+        const userWelcome = document.getElementById("user-welcome");
+        userWelcome.textContent =  userLogin.username;
+    }
+});
+
+  </script>
 </html>

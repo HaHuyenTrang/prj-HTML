@@ -28,7 +28,7 @@ function submitForm(event) {
             userId: Math.ceil(Math.random() * 1000000),
             username: username,
             password: password,
-            rePassword: confirmPassword,
+            cart:[],
         };
         userlocal.push(user);
         localStorage.setItem("user", JSON.stringify(userlocal));

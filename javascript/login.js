@@ -1,23 +1,28 @@
-var userName = document.getElementById('username');
-var passWord = document.getElementById('password');
+// //hiển thị user
+// document.addEventListener("DOMContentLoaded", function() {
+//     const userLogin = JSON.parse(localStorage.getItem("userLogin"));
 
-const formLogin = document.getElementById("register-form");
+//     if (userLogin) {
+//         const userWelcome = document.getElementById("user-welcome");
+//         userWelcome.textContent = "Welcome, " + userLogin.username;
+//     }
+// });
 
-formLogin.addEventListener("submit", function(e){
+function login(e) {
     e.preventDefault();
-    const userlocal = JSON.parse(localStorage.getItem("user")) || [];
-
-    const findUser = userlocal.find(
-        (user) =>
-            user.username === userName.value && user.password === passWord.value
-    );
-
-    if(!findUser){
-        alert("Tên tài khoản hoặc mật khẩu không đúng");
-    }else{
-        window.location.href = "home.html"
-    }
-
-    localStorage.setItem("userLogin", JSON.stringify(findUser));
-})
-
+  let userName = document.getElementById("username");
+  let passWord = document.getElementById("password");
+  const userlocal = JSON.parse(localStorage.getItem("user")) || [];
+  const findUser = userlocal.find(
+    (user) =>
+      user.username === userName.value && user.password === passWord.value
+  );
+  if (!findUser) {
+    alert("Tên tài khoản hoặc mật khẩu không đúng");
+  } else {
+    // khi đang nhập dung
+    // lưu id của user tren local 
+    window.location.href = "home.html";
+  }
+  localStorage.setItem("userLogin", JSON.stringify(findUser));
+}
