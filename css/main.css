@@ -1,4 +1,4 @@
-@import url(./layouts/header.css);
+@import url(./layouts/index.css);
 
 body{
     background-color: rgba(0, 255, 13, 0.041);
@@ -97,4 +97,32 @@ a{
     margin: 4px;
   }
   
- 
+ /* hiệu ứnh */
+ .clothing li:hover {
+  color: lightgreen;
+}
+.menu :hover {
+  color: lightgreen;
+}
+.menu-food li:hover {
+  background-color: rgba(0, 128, 0, 0.749);
+  color: white;
+  border-radius: 20px;
+  width: max-content;
+}
+.button :hover {
+  background-color: rgba(0, 128, 0, 0.749);
+  color: white;
+}
+#button :hover {
+  background-color: rgba(0, 128, 0, 0.749);
+  color: white;
+}
+.buy  :hover{
+  color: white;
+}
+#user-welcome{
+  color:  rgba(3, 34, 3, 0.74) ;
+  font-size: 25px;
+  
+}

@@ -9,7 +9,7 @@
 // });
 
 function login(e) {
-    e.preventDefault();
+  e.preventDefault();
   let userName = document.getElementById("username");
   let passWord = document.getElementById("password");
   const userlocal = JSON.parse(localStorage.getItem("user")) || [];
@@ -21,8 +21,8 @@ function login(e) {
     alert("Tên tài khoản hoặc mật khẩu không đúng");
   } else {
     // khi đang nhập dung
-    // lưu id của user tren local 
-    window.location.href = "home.html";
+    // lưu id của user tren local
+    window.location.href = "index.html";
   }
-  localStorage.setItem("userLogin", JSON.stringify(findUser));
+  localStorage.setItem("userLogin", JSON.stringify(findUser.userId));
 }

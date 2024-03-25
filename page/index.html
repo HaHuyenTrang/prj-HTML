@@ -9,37 +9,6 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
     />
-    <style>
-      .clothing li:hover {
-        color: lightgreen;
-      }
-      .menu :hover {
-        color: lightgreen;
-      }
-      .menu-food li:hover {
-        background-color: rgba(0, 128, 0, 0.749);
-        color: white;
-        border-radius: 20px;
-        width: max-content;
-      }
-      .button :hover {
-        background-color: rgba(0, 128, 0, 0.749);
-        color: white;
-      }
-      #button :hover {
-        background-color: rgba(0, 128, 0, 0.749);
-        color: white;
-      }
-      .buy  :hover{
-        color: white;
-      }
-      #user-welcome{
-        color:  rgba(3, 34, 3, 0.74) ;
-        font-size: 25px;
-        
-      }
-
-    </style>
   </head>
   <body>
     <div class="home_clothing">
@@ -53,13 +22,13 @@
           <li>LIÊN HỆ</li>
           <li>HOTLINE: 1900 1006</li>
           <li>
-            <span class="material-symbols-outlined"> shopping_bag </span>GIỎ
-            HÀNG
+           <a href="../page/cart.html"> <span class="material-symbols-outlined"> shopping_bag </span>GIỎ
+            HÀNG</a>
           </li>
           <li><span class="material-symbols-outlined">
               account_circle
               </span>
-            <div id="user-welcome"> </div>
+            <a href="../page/admin.html"><div id="user-welcome"> </div></a>
             </li>
             <li>
             <span id="button-2" class="material-symbols-outlined"> density_small </span>
@@ -212,7 +181,7 @@
       <button>XEM THÊM</button>
     </div>
     <div class="end">
-      <span class="material-symbols-outlined">
+       <span class="material-symbols-outlined">
         compost
         </span>TRANG VEGETABLE
         <br>
@@ -232,21 +201,30 @@
       
         <span class="material-symbols-outlined">
           mail
-          </span>@gmail.com
+        </span>@gmail.com
     <div>
-    
+   
   </body>
   <script src="../javascript/script.js"></script>
   <!-- <script src="../javascript/login.js"></script> -->
+  <!-- user sau khi đăng nhập thành công -->
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
+
+  document.addEventListener("DOMContentLoaded", function() {
     const userLogin = JSON.parse(localStorage.getItem("userLogin"));
 
     if (userLogin) {
+      const user = JSON.parse(localStorage.getItem("user"));
+      let infoUser= user.find((item)=>{
+        return item.userId==userLogin
+      })
+      if (user && infoUser.username) {
         const userWelcome = document.getElementById("user-welcome");
-        userWelcome.textContent =  userLogin.username;
+        userWelcome.textContent = ` ${infoUser.username}`;
+      }
     }
-});
+  });
 
   </script>
+
 </html>

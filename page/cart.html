@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/cart.css" />
+    <link rel="stylesheet" href="../css/admin.css" />
+  </head>
+  <body>
+    <div class="all">
+      <div>
+        <div class="background">
+          <h1>VEGETABLE</h1>
+          <br />
+
+          <p>Quản lí user</p>
+          <br />
+
+          <p>Quản lí product</p>
+          <br />
+
+          <p>Quản lí bill</p>
+        </div>
+      </div>
+      <div class="tbl">
+        <h1>Giỏ hàng của bạn</h1>
+        <table border="1px">
+          <tr>
+            <th>STT</th>
+            <th>Tên sản phẩm</th>
+            <th>Sản phẩm</th>
+            <th>Giá</th>
+            <th>số lượng</th>
+          </tr>
+          <!-- <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><button>+</button><button>-</button></td>
+
+            </tr>
+             -->
+          <tbody id="cart-items"></tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    // Lấy dữ liệu giỏ hàng từ localStorage
+    let users = JSON.parse(localStorage.getItem("user"));
+    let checkLogin = JSON.parse(localStorage.getItem("userLogin"));
+    let cartItems = users.find((user) => user.userId === checkLogin)?.cart;
+
+    // Hiển thị sản phẩm trong giỏ hàng
+    if (cartItems) {
+      const cartItemsContainer = document.getElementById("cart-items");
+
+      cartItems.forEach((item, index) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${item.name}</td>
+                    <td><img src="${item.image}" alt="" /></td>
+                    <td>${item.giá}</td>
+                    <td>
+                        <button onclick="decreaseQuantity(${index})">-</button>
+                        <span id="quantity-${index}">1</span>
+                        <button onclick="increaseQuantity(${index})">+</button>
+                    </td>
+                `;
+
+        cartItemsContainer.appendChild(row);
+      });
+    }
+
+    // Hàm giảm số lượng sản phẩm
+    function decreaseQuantity(index) {
+      const quantityElement = document.getElementById(`quantity-${index}`);
+      let quantity = parseInt(quantityElement.textContent);
+
+      if (quantity > 1) {
+        quantity--;
+        quantityElement.textContent = quantity;
+      }
+    }
+
+    // Hàm tăng số lượng sản phẩm
+    function increaseQuantity(index) {
+      const quantityElement = document.getElementById(`quantity-${index}`);
+      let quantity = parseInt(quantityElement.textContent);
+
+      quantity++;
+      quantityElement.textContent = quantity;
+    }
+  </script>
+</html>

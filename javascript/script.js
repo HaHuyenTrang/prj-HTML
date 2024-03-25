@@ -1,6 +1,5 @@
 function submitForm(event) {
   event.preventDefault(); // Ngăn chặn việc gửi form
-
   // Lấy giá trị từ các trường đăng ký
   var username = document.getElementById("username").value;
   var password = document.getElementById("password").value;
@@ -47,33 +46,7 @@ sigup.addEventListener("click", function (e) {
 
 //thêm giỏ hàng
 // Lấy tất cả các nút "Thêm vào" trên trang
-var addToCartButtons = document.querySelectorAll(".buy button");
 
-// Xử lý sự kiện click cho mỗi nút "Thêm vào"
-addToCartButtons.forEach(function (button) {
-  button.addEventListener("click", function () {
-    // Lấy thông tin sản phẩm từ phần tử cha của nút "Thêm vào"
-    var productContainer = button.parentNode.parentNode;
-    var productName = productContainer.querySelector("p").innerText;
-    var productPrice = productContainer.querySelector("b").innerText;
-
-    // Tạo một đối tượng sản phẩm mới
-    var product = {
-      name: productName,
-      price: productPrice,
-    };
-
-    // Thêm sản phẩm vào giỏ hàng (ở đây là một hàm xử lý riêng)
-    addToCart(product);
-  });
-});
-
-// Hàm xử lý thêm sản phẩm vào giỏ hàng
-function addToCart(product) {
-  // Thực hiện logic để thêm sản phẩm vào giỏ hàng
-  // ở đây, bạn có thể sử dụng các phương thức và lưu trữ dữ liệu phù hợp
-  console.log("Sản phẩm đã được thêm vào giỏ hàng:", product);
-}
 //product
 let products2 = [
   {
@@ -175,7 +148,7 @@ let products2 = [
 ];
 
 // //lưu data lên local
-localStorage.setItem("products", JSON.stringify(products2));
+// localStorage.setItem("products", JSON.stringify(products2));
 
 //lấy  dữ liệu về
 let products = JSON.parse(localStorage.getItem("products")) || [];
@@ -186,15 +159,15 @@ function renderProduct() {
   for (let i = 0; i < products.length; i++) {
     element += `
           <div>
-                <img
-                  src="${products[i].image}"
-                  alt=""
-                />
+                <a href="./detail.html"><img onclick="detail(${products[i].id})"
+                src="${products[i].image}"
+                alt=""
+              /></a>
                 <p>${products[i].name}</p>
                 <b>${products[i].giá}</b>
                 <div class="buy">
                   <br>
-                  <button onclick="addToCart()">Thêm vào <span class="material-symbols-outlined"> shopping_bag </span> </button> <button>mua ngay</button>
+                  <button onclick="addToCart(${products[i].id})">Thêm vào <span class="material-symbols-outlined"> shopping_bag </span> </button> <button>mua ngay</button>
                 </div> 
                 <br>
           </div>
@@ -206,46 +179,42 @@ function renderProduct() {
 }
 renderProduct();
 
-// Hàm đi mua hàng
-function addToCart() {
-  console.log(111111);
+// // Hàm đi mua hàng
+function addToCart(idProduct) {
+
   // Kiểm tra xem người dùng đã đăng nhập chưa
-  let checkLogin = JSON.parse(localStorage.getItem("checkLogin"));
-  let users = JSON.parse(localStorage.getItem("users"));
+  let checkLogin = JSON.parse(localStorage.getItem("userLogin"));
+  let users = JSON.parse(localStorage.getItem("user"));
+  if (checkLogin == null) {
+    console.log("vui lòng đăng nhập để mua hàng!");
+    alert("vui lòng đăng nhập để mua hàng!");
+    window.location.href = "login.html";
 
-  if (checkLogin !== null && users !== null) {
-    let currentUser = null;
+    return;
+  } else {
+    // tiến hành đi lấy giỏ hàng để đi mua hàng
     for (let i = 0; i < users.length; i++) {
-      if (users[i].id === checkLogin) {
-        currentUser = users[i];
+      if (users[i].userId == checkLogin) {
+        // : đây là giỏ hàng users[i].cart
+        // phải đi lấy sản phẩm để cho vào giỏ
+        // console.log(11111,idProduct);
+        for (let j = 0; j < products2.length; j++) {
+          if (products2[j].id == idProduct) {
+            // console.log(products2[j]);
+            users[i].cart.push(products[j]);
+            console.log("Sản phẩm đã được thêm vào giỏ hàng:", products[j]);
+            break;
+          }
+        }
         break;
-      } else {
-        alert("vui lòng đăng nhập để mua hàng");
       }
-    }
-
-    if (currentUser) {
-      let element = "";
-      for (let j = 0; j < currentUser.cart.length; j++) {
-        element += `
-          <tr>
-            <td>${currentUser.cart[j].id}</td>
-            <td><img src=".${currentUser.cart[j].image}"/></td>
-            <td>${currentUser.cart[j].name}</td>
-            <td>${currentUser.cart[j].price}</td>
-            <td> <input type="number" value="${currentUser.cart[j].quantity}"> </td>
-          </tr>
-        `;
-      }
-
-      document.getElementById("renderProduct").innerHTML = element;
-    } else {
-      window.location.href = "login.html";
     }
   }
+  // Cập nhật dữ liệu người dùng vào localStorage
+  localStorage.setItem("user", JSON.stringify(users));
 }
 
-addToCart();
+
 
 function showQuantityCart() {
   // Lấy giỏ hàng ra, độ dài là số lượng sản phẩm trong giỏ hàng
@@ -264,3 +233,12 @@ function showQuantityCart() {
 }
 
 showQuantityCart();
+
+
+
+function detail(productId) {
+
+    console.log(1111111,productId);
+    // khi click từng sản phẩm lưu id trên local
+    localStorage.setItem("productId",productId)
+}
