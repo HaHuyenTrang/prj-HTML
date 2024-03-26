@@ -32,16 +32,9 @@
             <th>Sản phẩm</th>
             <th>Giá</th>
             <th>số lượng</th>
+            <th>Tổng</th>
+            <th>tt</th>
           </tr>
-          <!-- <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><button>+</button><button>-</button></td>
-
-            </tr>
-             -->
           <tbody id="cart-items"></tbody>
         </table>
       </div>
@@ -70,30 +63,61 @@
                         <span id="quantity-${index}">1</span>
                         <button onclick="increaseQuantity(${index})">+</button>
                     </td>
+                    <td><span id="total-${index}"></span></td>
+                    <td><button onclick="removeItem(${index})">xóa</button></td>
                 `;
 
         cartItemsContainer.appendChild(row);
       });
     }
 
-    // Hàm giảm số lượng sản phẩm
+
+    
+function updateCart() {
+  // Tìm user hiện tại trong danh sách users
+  const currentUser = users.find((user) => user.userId === checkLogin);
+
+  // Cập nhật giỏ hàng của user
+  currentUser.cart = cartItems;
+
+  // Lưu lại users vào localStorage
+  localStorage.setItem("user", JSON.stringify(users));
+}
+
+    // hàm tính tổng giá sản phẩm đã thêm
     function decreaseQuantity(index) {
-      const quantityElement = document.getElementById(`quantity-${index}`);
-      let quantity = parseInt(quantityElement.textContent);
+  const quantityElement = document.getElementById(`quantity-${index}`);
+  let quantity = parseInt(quantityElement.textContent);
 
-      if (quantity > 1) {
-        quantity--;
-        quantityElement.textContent = quantity;
-      }
-    }
+  if (quantity > 1) {
+    quantity--;
+    quantityElement.textContent = quantity;
 
-    // Hàm tăng số lượng sản phẩm
-    function increaseQuantity(index) {
-      const quantityElement = document.getElementById(`quantity-${index}`);
-      let quantity = parseInt(quantityElement.textContent);
+    updateTotalPrice(index, quantity);
+  }
+}
 
-      quantity++;
-      quantityElement.textContent = quantity;
-    }
+function increaseQuantity(index) {
+  const quantityElement = document.getElementById(`quantity-${index}`);
+  let quantity = parseInt(quantityElement.textContent);
+
+  quantity++;
+  quantityElement.textContent = quantity;
+
+  updateTotalPrice(index, quantity);
+}
+
+function updateTotalPrice(index, quantity) {
+  const totalPriceElement = document.getElementById(`total-${index}`);
+  const item = cartItems[index];
+  const totalPrice = item.giá * quantity;
+  totalPriceElement.textContent = totalPrice;
+
+  // Cập nhật giá trị tổng trong giỏ hàng
+  item.tổng = totalPrice;
+
+  // // // Lưu lại giỏ hàng vào localStorage
+  // localStorage.setItem("user", JSON.stringify(users));
+}
   </script>
 </html>

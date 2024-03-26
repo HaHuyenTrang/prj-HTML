@@ -9,6 +9,11 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
     />
+    <style>
+      html, body {
+          scroll-behavior: smooth;
+      }
+  </style>
   </head>
   <body>
     <div class="home_clothing">
@@ -18,7 +23,7 @@
       </div>
       <div class="clothing">
         <ul>
-          <li>HOME</li>
+          <li><a href="#" onclick="scrollToTop()">HOME</a></li>
           <li>LIÊN HỆ</li>
           <li>HOTLINE: 1900 1006</li>
           <li>
@@ -225,6 +230,13 @@
     }
   });
 
-  </script>
 
+ //hiệu ứng trôi #
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+  </script>
 </html>

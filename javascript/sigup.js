@@ -29,6 +29,7 @@ function submitForm(event) {
             username: username,
             password: password,
             cart:[],
+            status:true,f
         };
         userlocal.push(user);
         localStorage.setItem("user", JSON.stringify(userlocal));
