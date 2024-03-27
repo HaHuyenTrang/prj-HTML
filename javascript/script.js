@@ -242,3 +242,21 @@ function detail(productId) {
     // khi click từng sản phẩm lưu id trên local
     localStorage.setItem("productId",productId)
 }
+
+
+
+// //hiển thị tên
+// document.addEventListener("DOMContentLoaded", function() {
+//   const userLogin = JSON.parse(localStorage.getItem("userLogin"));
+
+//   if (userLogin) {
+//     const user = JSON.parse(localStorage.getItem("user"));
+//     let infoUser= user.find((item)=>{
+//       return item.userId==userLogin
+//     })
+//     if (user && infoUser.username) {
+//       const userWelcome = document.getElementById("user-welcome");
+//       userWelcome.textContent = ` ${infoUser.username}`;
+//     }
+//   }
+// });

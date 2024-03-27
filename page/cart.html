@@ -6,6 +6,17 @@
     <title>Document</title>
     <link rel="stylesheet" href="../css/cart.css" />
     <link rel="stylesheet" href="../css/admin.css" />
+    <style>
+      #buy {
+        width: 820px;
+        height: 40px;
+        
+      }
+      #buy:hover {
+        color: aliceblue;
+        background-color: rgb(124, 185, 124);
+      }
+    </style>
   </head>
   <body>
     <div class="all">
@@ -33,91 +44,175 @@
             <th>Giá</th>
             <th>số lượng</th>
             <th>Tổng</th>
-            <th>tt</th>
+            <th></th>
           </tr>
           <tbody id="cart-items"></tbody>
         </table>
+        <button onclick="buyCart()" id="buy">Mua</button>
       </div>
     </div>
+    <script>
+      // Lấy dữ liệu giỏ hàng từ localStorage
+      let users = JSON.parse(localStorage.getItem("user"));
+      let checkLogin = JSON.parse(localStorage.getItem("userLogin"));
+      let cartItems = users.find((user) => user.userId === checkLogin)?.cart;
+
+      // Hiển thị sản phẩm trong giỏ hàng
+      if (cartItems) {
+        const cartItemsContainer = document.getElementById("cart-items");
+
+        cartItems.forEach((item, index) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+                      <td>${index + 1}</td>
+                      <td>${item.name}</td>
+                      <td><img src="${item.image}" alt="" /></td>
+                      <td>${item.giá}</td>
+                      <td>
+                          <button onclick="decreaseQuantity(${index})">-</button>
+                          <span id="quantity-${index}">${
+            item.quantity || 1
+          }</span>
+                          <button onclick="increaseQuantity(${index})">+</button>
+                      </td>
+                      <td><span id="total-${index}">${
+            item.giá * item.quantity
+          }</span></td>
+                      <td><button onclick="deleteItem(${
+                        item.id
+                      })">xóa</button></td>
+                  `;
+
+          cartItemsContainer.appendChild(row);
+        });
+      }
+
+      function updateCart() {
+        // Tìm user hiện tại trong danh sách users
+        const currentUser = users.find((user) => user.userId === checkLogin);
+
+        // Cập nhật giỏ hàng của user
+        currentUser.cart = cartItems;
+
+        // Lưu lại users vào localStorage
+        localStorage.setItem("user", JSON.stringify(users));
+      }
+
+      // hàm tính tổng giá sản phẩm đã thêm
+      function decreaseQuantity(index) {
+        const quantityElement = document.getElementById(`quantity-${index}`);
+        let quantity = parseInt(quantityElement.textContent);
+
+        if (quantity > 1) {
+          quantity--;
+          quantityElement.textContent = quantity;
+
+          updateTotalPrice(index, quantity);
+        }
+      }
+
+      function increaseQuantity(index) {
+        const quantityElement = document.getElementById(`quantity-${index}`);
+        let quantity = parseInt(quantityElement.textContent);
+
+        quantity++;
+        quantityElement.textContent = quantity;
+
+        updateTotalPrice(index, quantity);
+      }
+
+      function updateTotalPrice(index, quantity) {
+        const totalPriceElement = document.getElementById(`total-${index}`);
+        const item = cartItems[index];
+        const totalPrice = item.giá * quantity;
+        totalPriceElement.textContent = totalPrice;
+
+        // Cập nhật giá trị tổng trong giỏ hàng
+        item.tổng = totalPrice;
+
+        cartItems[index].quantity = quantity;
+        const indexUser = users.findIndex((user) => user.userId === checkLogin);
+
+        users[indexUser].cart = cartItems;
+
+        // // Lưu lại giỏ hàng vào localStorage
+        localStorage.setItem("user", JSON.stringify(users));
+      }
+
+      // // xóa sản phẩm trong giỏ hàng
+      // function deleteItem(index) {
+      //   console.log(22222, index);
+      //   /*
+      //     b1 : lấy id của sản phẩm
+      //     b2: lấy giỏ hàng của user ra
+      //     b3: duyệt cart user xem sản phẩm trùng id với index thì xóa
+      //     b4: sau khi xóa lưu lại rồi gọi hàm update
+      //    */
+      // }
+
+      // xóa sản phẩm trong giỏ hàng
+      function deleteItem(index) {
+        // Bước 1: Lấy id của sản phẩm
+        const productId = index;
+
+        // Bước 2: Lấy giỏ hàng của user ra
+        const currentUserIndex = users.findIndex(
+          (user) => user.userId === checkLogin
+        );
+
+        if (currentUserIndex !== -1) {
+          const currentUser = users[currentUserIndex];
+          const cartItems = currentUser.cart;
+
+          // Bước 3: Duyệt cart user xem sản phẩm trùng id với index thì xóa
+          const itemIndex = cartItems.findIndex(
+            (item) => item.id === productId
+          );
+
+          if (itemIndex !== -1) {
+            cartItems.splice(itemIndex, 1); // Xóa sản phẩm khỏi giỏ hàng
+
+            // Bước 4: Lưu lại rồi gọi hàm update
+            currentUser.cart = cartItems;
+            updateCart();
+
+            // Xóa hàng trong bảng hiển thị
+            const cartItemsContainer = document.getElementById("cart-items");
+            cartItemsContainer.innerHTML = ""; // Xóa hết các hàng hiện tại
+
+            // Hiển thị lại sản phẩm trong giỏ hàng sau khi xóa
+            cartItems.forEach((item, index) => {
+              const row = document.createElement("tr");
+              row.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${item.name}</td>
+                <td><img src="${item.image}" alt="" /></td>
+                <td>${item.giá}</td>
+                <td>
+                  <button onclick="decreaseQuantity(${index})">-</button>
+                  <span id="quantity-${index}">${item.quantity || 1}</span>
+                  <button onclick="increaseQuantity(${index})">+</button>
+                </td>
+                <td><span id="total-${index}">${ item.giá * item.quantity}</span></td>
+                <td><button onclick="deleteItem(${item.id})">xóa</button></td>
+              `;
+              cartItemsContainer.appendChild(row);
+            });
+          } else {
+            console.log("Không tìm thấy sản phẩm trong giỏ hàng.");
+          }
+        } else {
+          console.log("Người dùng không tồn tại.");
+        }
+      }
+      // hàm mua sản phẩm trong giỏ hàng 
+       let totalPrice = 0;
+          cartItems.forEach((item) => {
+          totalPrice += item.giá * item.quantity;
+        });
+        function buyCart() {
+           alert("Tổng giá trị các sản phẩm bạn muốn mua là: " + totalPrice );
+        }
+    </script>
   </body>
-
-  <script>
-    // Lấy dữ liệu giỏ hàng từ localStorage
-    let users = JSON.parse(localStorage.getItem("user"));
-    let checkLogin = JSON.parse(localStorage.getItem("userLogin"));
-    let cartItems = users.find((user) => user.userId === checkLogin)?.cart;
-
-    // Hiển thị sản phẩm trong giỏ hàng
-    if (cartItems) {
-      const cartItemsContainer = document.getElementById("cart-items");
-
-      cartItems.forEach((item, index) => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-                    <td>${index + 1}</td>
-                    <td>${item.name}</td>
-                    <td><img src="${item.image}" alt="" /></td>
-                    <td>${item.giá}</td>
-                    <td>
-                        <button onclick="decreaseQuantity(${index})">-</button>
-                        <span id="quantity-${index}">1</span>
-                        <button onclick="increaseQuantity(${index})">+</button>
-                    </td>
-                    <td><span id="total-${index}"></span></td>
-                    <td><button onclick="removeItem(${index})">xóa</button></td>
-                `;
-
-        cartItemsContainer.appendChild(row);
-      });
-    }
-
-
-    
-function updateCart() {
-  // Tìm user hiện tại trong danh sách users
-  const currentUser = users.find((user) => user.userId === checkLogin);
-
-  // Cập nhật giỏ hàng của user
-  currentUser.cart = cartItems;
-
-  // Lưu lại users vào localStorage
-  localStorage.setItem("user", JSON.stringify(users));
-}
-
-    // hàm tính tổng giá sản phẩm đã thêm
-    function decreaseQuantity(index) {
-  const quantityElement = document.getElementById(`quantity-${index}`);
-  let quantity = parseInt(quantityElement.textContent);
-
-  if (quantity > 1) {
-    quantity--;
-    quantityElement.textContent = quantity;
-
-    updateTotalPrice(index, quantity);
-  }
-}
-
-function increaseQuantity(index) {
-  const quantityElement = document.getElementById(`quantity-${index}`);
-  let quantity = parseInt(quantityElement.textContent);
-
-  quantity++;
-  quantityElement.textContent = quantity;
-
-  updateTotalPrice(index, quantity);
-}
-
-function updateTotalPrice(index, quantity) {
-  const totalPriceElement = document.getElementById(`total-${index}`);
-  const item = cartItems[index];
-  const totalPrice = item.giá * quantity;
-  totalPriceElement.textContent = totalPrice;
-
-  // Cập nhật giá trị tổng trong giỏ hàng
-  item.tổng = totalPrice;
-
-  // // // Lưu lại giỏ hàng vào localStorage
-  // localStorage.setItem("user", JSON.stringify(users));
-}
-  </script>
 </html>
