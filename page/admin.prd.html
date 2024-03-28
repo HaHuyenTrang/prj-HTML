@@ -9,6 +9,14 @@
       img {
         width: 300px;
       }
+      #add {
+        width: 600px;
+        height: 40px;
+      }
+      #add:hover {
+        color: aliceblue;
+        background-color: rgb(124, 185, 124);
+      }
     </style>
   </head>
   <body>
@@ -29,21 +37,20 @@
       <div class="tbl">
         <h1>Quản lí sản phẩm</h1>
         <table border="1px">
-          <tr>
-            <th>STT</th>
-            <th>Tên sản phẩm</th>
-            <th>Sản phẩm</th>
-            <th>Giá</th>
-            <th>Số lượng</th>
-          </tr>
-          <tr>
-            <!-- <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td> -->
-          </tr>
+          <thead>
+            <tr>
+              <th>STT</th>
+              <!-- <th>Id</th> -->
+              <th>Tên sản phẩm</th>
+              <th>Sản phẩm</th>
+              <th>Giá</th>
+              <th>Số lượng</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
         </table>
+        <button onclick="addProduct()" id="add">Thêm sản phẩm</button>
       </div>
     </div>
   </body>

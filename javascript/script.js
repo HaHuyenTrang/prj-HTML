@@ -63,7 +63,7 @@ let products2 = [
     name: "Nấm kim châm",
     giá: "15000",
     id: 2,
-    stock: 20,
+    stock: 37,
   },
   {
     image:
@@ -71,7 +71,7 @@ let products2 = [
     name: "Thịt lợn",
     giá: "300000",
     id: 3,
-    stock: 20,
+    stock: 9,
   },
   {
     image:
@@ -79,7 +79,7 @@ let products2 = [
     name: "Kẹo xylitol",
     giá: "40000",
     id: 4,
-    stock: 20,
+    stock: 21,
   },
   {
     image:
@@ -87,7 +87,7 @@ let products2 = [
     name: "Bia lon",
     giá: "320000",
     id: 5,
-    stock: 20,
+    stock: 15,
   },
   {
     image:
@@ -95,7 +95,7 @@ let products2 = [
     name: "Bánh mì",
     giá: "15000",
     id: 6,
-    stock: 20,
+    stock: 6,
   },
   {
     image:
@@ -103,7 +103,7 @@ let products2 = [
     name: "Muối sạch",
     giá: "8000",
     id: 7,
-    stock: 20,
+    stock: 19,
   },
   {
     image:
@@ -111,7 +111,7 @@ let products2 = [
     name: "Mì cung đình",
     giá: "150000",
     id: 8,
-    stock: 20,
+    stock: 25,
   },
   {
     image:
@@ -119,7 +119,7 @@ let products2 = [
     name: "Cải ngọt",
     giá: "30000",
     id: 9,
-    stock: 20,
+    stock: 24,
   },
   {
     image:
@@ -127,7 +127,7 @@ let products2 = [
     name: "Nấm to",
     giá: "105000",
     id: 10,
-    stock: 20,
+    stock: 56,
   },
   {
     image:
@@ -135,7 +135,7 @@ let products2 = [
     name: "Thịt heo",
     giá: "300000",
     id: 11,
-    stock: 20,
+    stock: 45,
   },
   {
     image:
@@ -143,13 +143,13 @@ let products2 = [
     name: "Bắp cải",
     giá: "10000",
     id: 12,
-    stock: 20,
+    stock: 60,
   },
 ];
 
 // //lưu data lên local
 // localStorage.setItem("products", JSON.stringify(products2));
-
+// 
 //lấy  dữ liệu về
 let products = JSON.parse(localStorage.getItem("products")) || [];
 console.log(products);
@@ -181,7 +181,6 @@ renderProduct();
 
 // // Hàm đi mua hàng
 function addToCart(idProduct) {
-
   // Kiểm tra xem người dùng đã đăng nhập chưa
   let checkLogin = JSON.parse(localStorage.getItem("userLogin"));
   let users = JSON.parse(localStorage.getItem("user"));
@@ -214,8 +213,6 @@ function addToCart(idProduct) {
   localStorage.setItem("user", JSON.stringify(users));
 }
 
-
-
 function showQuantityCart() {
   // Lấy giỏ hàng ra, độ dài là số lượng sản phẩm trong giỏ hàng
   let checkLogin = JSON.parse(localStorage.getItem("checkLogin"));
@@ -234,16 +231,11 @@ function showQuantityCart() {
 
 showQuantityCart();
 
-
-
 function detail(productId) {
-
-    console.log(1111111,productId);
-    // khi click từng sản phẩm lưu id trên local
-    localStorage.setItem("productId",productId)
+  console.log(1111111, productId);
+  // khi click từng sản phẩm lưu id trên local
+  localStorage.setItem("productId", productId);
 }
-
-
 
 // //hiển thị tên
 // document.addEventListener("DOMContentLoaded", function() {

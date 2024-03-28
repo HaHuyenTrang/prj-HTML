@@ -8,20 +8,22 @@
     <link rel="stylesheet" href="../css/admin.css" />
     <style>
       #buy {
-        width: 820px;
+        width: 812px;
         height: 40px;
-        
       }
       #buy:hover {
         color: aliceblue;
         background-color: rgb(124, 185, 124);
+      }
+      body {
+        text-align: center;
       }
     </style>
   </head>
   <body>
     <div class="all">
       <div>
-        <div class="background">
+        <!-- <div class="background">
           <h1>VEGETABLE</h1>
           <br />
 
@@ -32,7 +34,7 @@
           <br />
 
           <p>Quản lí bill</p>
-        </div>
+        </div> -->
       </div>
       <div class="tbl">
         <h1>Giỏ hàng của bạn</h1>
@@ -64,24 +66,20 @@
         cartItems.forEach((item, index) => {
           const row = document.createElement("tr");
           row.innerHTML = `
-                      <td>${index + 1}</td>
-                      <td>${item.name}</td>
-                      <td><img src="${item.image}" alt="" /></td>
-                      <td>${item.giá}</td>
-                      <td>
-                          <button onclick="decreaseQuantity(${index})">-</button>
-                          <span id="quantity-${index}">${
-            item.quantity || 1
-          }</span>
-                          <button onclick="increaseQuantity(${index})">+</button>
-                      </td>
-                      <td><span id="total-${index}">${
-            item.giá * item.quantity
+              <td>${index + 1}</td>
+              <td>${item.name}</td>
+              <td><img src="${item.image}" alt="" /></td>
+              <td>${item.giá}</td>
+              <td>
+                  <button onclick="decreaseQuantity(${index})">-</button>
+                  <span id="quantity-${index}">${item.quantity || 1}</span>
+                  <button onclick="increaseQuantity(${index})">+</button>
+              </td>
+              <td><span id="total-${index}">${
+            item.giá * (item.quantity || 1)
           }</span></td>
-                      <td><button onclick="deleteItem(${
-                        item.id
-                      })">xóa</button></td>
-                  `;
+              <td><button onclick="deleteItem(${item.id})">xóa</button></td>
+          `;
 
           cartItemsContainer.appendChild(row);
         });
@@ -193,7 +191,9 @@
                   <span id="quantity-${index}">${item.quantity || 1}</span>
                   <button onclick="increaseQuantity(${index})">+</button>
                 </td>
-                <td><span id="total-${index}">${ item.giá * item.quantity}</span></td>
+                <td><span id="total-${index}">${
+                item.giá * item.quantity
+              }</span></td>
                 <td><button onclick="deleteItem(${item.id})">xóa</button></td>
               `;
               cartItemsContainer.appendChild(row);
@@ -205,14 +205,14 @@
           console.log("Người dùng không tồn tại.");
         }
       }
-      // hàm mua sản phẩm trong giỏ hàng 
-       let totalPrice = 0;
-          cartItems.forEach((item) => {
-          totalPrice += item.giá * item.quantity;
-        });
-        function buyCart() {
-           alert("Tổng giá trị các sản phẩm bạn muốn mua là: " + totalPrice );
-        }
+      // hàm mua sản phẩm trong giỏ hàng
+      let totalPrice = 0;
+      cartItems.forEach((item) => {
+        totalPrice += item.giá * item.quantity;
+      });
+      function buyCart() {
+        alert("Tổng giá trị các sản phẩm bạn muốn mua là: " + totalPrice);
+      }
     </script>
   </body>
 </html>
